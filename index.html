@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're Invited! 🎉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 12s ease infinite;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .confetti span {
+            position: absolute;
+            top: -20px;
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { top: -20px; transform: rotate(0deg); opacity: 1; }
+            100% { top: 110vh; transform: rotate(720deg); opacity: 0.3; }
+        }
+
+        .invite-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .invite-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 30px;
+            padding: 60px 50px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,215,0,0.1), inset 0 1px 0 rgba(255,255,255,0.1);
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .top-label {
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 900;
+            text-align: center;
+            color: #ffffff;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 0 0 40px rgba(255,215,0,0.4);
+        }
+
+        .birthday-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            text-align: center;
+            color: #FFD700;
+            margin-bottom: 40px;
+        }
+
+        .divider {
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+            margin: 0 auto 40px;
+        }
+
+        .invite-intro {
+            text-align: center;
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.85);
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .detail-box {
+            background: rgba(255, 215, 0, 0.07);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 16px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .detail-box:hover {
+            transform: translateY(-4px);
+        }
+
+        .detail-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #FFD700;
+            margin-bottom: 8px;
+        }
+
+        .detail-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+
+        .venue-box {
+            grid-column: 1 / -1;
+            background: rgba(255, 215, 0, 0.07);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 16px;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .rsvp-section {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,165,0,0.1));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .rsvp-section p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .rsvp-section strong {
+            color: #FFD700;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.6);
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .emoji-row {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            letter-spacing: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .invite-card {
+                padding: 40px 25px;
+            }
+            h1 {
+                font-size: 3.5rem;
+            }
+            .birthday-text {
+                font-size: 1.5rem;
+            }
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+            .venue-box {
+                grid-column: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Confetti -->
+    <div class="confetti" id="confetti"></div>
+
+    <div class="invite-wrapper">
+        <div class="invite-card">
+
+            <p class="top-label">✨ You are cordially invited ✨</p>
+
+            <h1>Birthday<br>Party!</h1>
+            <p class="birthday-text">Let's celebrate in style 🥂</p>
+
+            <div class="divider"></div>
+
+            <p class="invite-intro">
+                Join us for a spectacular celebration<br>
+                as we raise a glass and party the night away!
+            </p>
+
+            <div class="emoji-row">🎂🎉🥳🍾🎊</div>
+
+            <div class="details-grid">
+                <div class="detail-box">
+                    <div class="detail-icon">📅</div>
+                    <p class="detail-label">Date</p>
+                    <p class="detail-value">Sunday<br>14th September 2026</p>
+                </div>
+                <div class="detail-box">
+                    <div class="detail-icon">🕒</div>
+                    <p class="detail-label">Time</p>
+                    <p class="detail-value">3:00 PM<br>onwards</p>
+                </div>
+                <div class="venue-box">
+                    <div class="detail-icon">🏰</div>
+                    <p class="detail-label">Venue</p>
+                    <p class="detail-value" style="font-size:1.4rem;">The Grove Hotel<br><span style="font-size:1rem; color: rgba(255,255,255,0.7);">Hertfordshire</span></p>
+                </div>
+            </div>
+
+            <div class="rsvp-section">
+                <p>🥂 <strong>Please RSVP</strong> so we can make sure there's enough champagne to go around!<br>
+                We'd love to know if you can make it — the more the merrier! 🎊</p>
+            </div>
+
+            <p class="footer-note">"The more you celebrate life, the more there is to celebrate." 🌟</p>
+
+        </div>
+    </div>
+
+    <script>
+        const confettiContainer = document.getElementById('confetti');
+        const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#A8E6CF', '#FF8C94', '#FFD3B6', '#ffffff'];
+
+        for (let i = 0; i < 60; i++) {
+            const span = document.createElement('span');
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.width = (Math.random() * 8 + 6) + 'px';
+            span.style.height = (Math.random() * 8 + 6) + 'px';
+            span.style.background = colors[Math.floor(Math.random() * colors.length)];
+            span.style.animationDuration = (Math.random() * 6 + 6) + 's';
+            span.style.animationDelay = (Math.random() * 8) + 's';
+            span.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+            confettiContainer.appendChild(span);
+        }
+    </script>
+
+</body>
+</html>
